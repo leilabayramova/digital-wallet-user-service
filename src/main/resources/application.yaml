@@ -1,0 +1,19 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: digital-wallet-user-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/digital_wallet_user_db
+    username: postgres
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  liquibase:
+    change-log: classpath:changelog-master.yaml
