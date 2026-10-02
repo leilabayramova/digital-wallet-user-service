@@ -17,4 +17,5 @@ public class UserResponseDto {
     private boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Long version;
 }

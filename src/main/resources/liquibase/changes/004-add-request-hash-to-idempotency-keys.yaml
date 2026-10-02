@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-add-request-hash-to-idempotency-keys
+      author: leila
+
+      changes:
+        - addColumn:
+            tableName: idempotency_keys
+            columns:
+              - column:
+                  name: request_hash
+                  type: VARCHAR(64)
+                  defaultValue: ""
+                  constraints:
+                    nullable: false
+
+      rollback:
+        - dropColumn:
+            tableName: idempotency_keys
+            columnName: request_hash

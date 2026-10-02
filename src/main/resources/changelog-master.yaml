@@ -1,3 +1,9 @@
 databaseChangeLog:
   - include:
       file: liquibase/changes/001-create-users-table.yaml
+  - include:
+      file: liquibase/changes/002-add-version-to-users.yaml
+  - include:
+      file: liquibase/changes/003-create-idempotency-keys-table.yaml
+  - include:
+      file: liquibase/changes/004-add-request-hash-to-idempotency-keys.yaml

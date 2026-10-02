@@ -1,5 +1,6 @@
 package com.example.digitalwalletuserservice.exception;
 
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,6 +28,30 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleEmailAlreadyExists(
             EmailAlreadyExistsException exception
+    ) {
+        return new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+    }
+
+    @ExceptionHandler(OptimisticLockingFailureException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleOptimisticLockingFailure(
+            OptimisticLockingFailureException exception
+    ) {
+        return new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "The resource was updated by another request. Please retry.",
+                LocalDateTime.now()
+        );
+    }
+
+    @ExceptionHandler(IdempotencyKeyConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleIdempotencyKeyConflict(
+            IdempotencyKeyConflictException exception
     ) {
         return new ErrorResponse(
                 HttpStatus.CONFLICT.value(),

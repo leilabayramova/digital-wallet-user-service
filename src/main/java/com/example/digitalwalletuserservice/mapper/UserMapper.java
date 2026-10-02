@@ -22,6 +22,7 @@ public interface UserMapper {
                 .active(userEntity.isActive())
                 .createdAt(userEntity.getCreatedAt())
                 .updatedAt(userEntity.getUpdatedAt())
+                .version(userEntity.getVersion())
                 .build();
     }
 

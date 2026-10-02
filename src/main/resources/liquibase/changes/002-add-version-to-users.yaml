@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-add-version-to-users
+      author: leila
+
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: version
+                  type: BIGINT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+
+      rollback:
+        - dropColumn:
+            tableName: users
+            columnName: version
